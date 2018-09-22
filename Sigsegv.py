@@ -93,11 +93,8 @@ async def snap(ctx, *args):
 
 @Bot.command()
 async def caps(ctx, *args):
-	msgstr = ""
 	if len(args) > 0:
-		for word in args:
-			msgstr += (word + " ")
-		await ctx.send(msgstr.upper())
+		await ctx.send(' '.join(args).upper())
 	else:
 		await ctx.send("Usge: `{}caps <string of letters to capitalize>`".format(Bot.command_prefix))
 
@@ -122,9 +119,7 @@ async def dump(ctx, *args):
 async def freesoftware(ctx, *args):
 	with open("rs.gif", 'rb') as f:
 		await ctx.send(file=discord.File(f, "rs.gif"))
-
-	author = ctx.message.author
-	channel = author.voice.voice_channel
+	channel = ctx.message.author.voice.voice_channel 
 	await bot.join_voice_channel(channel)
 	player = await vc.create_ytdl_player()
 	player.start(FSSONG)
